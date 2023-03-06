@@ -1,0 +1,12 @@
+<template>
+  <div class="<%- kebabCaseName %>"></div>
+</template>
+
+<script setup lang="ts">
+  import {props} from "./props";
+  let prop = defineProps(props);
+</script>
+
+<style lang="scss">
+  @import "./<%- camelizeName %>.<%- styleCss %>";
+</style>

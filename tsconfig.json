@@ -1,0 +1,12 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./lib",
+        "types": [
+            "@dcloudio/types"
+        ]
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
