@@ -3,7 +3,7 @@ import { resolve } from 'path'
 export const dirname = getDirname(import.meta.url);
 export const CWD = process.cwd();
 export const KEYLION_CONFIG = resolve(CWD, "keylion.config.mjs");
-export const SRC_DIR = resolve(CWD, "views");
+export const SRC_DIR = resolve(CWD, "src");
 export const ES_DIR = resolve(CWD, "es");
 export const LIB_DIR = resolve(CWD, "lib");
 export const UMD_DIR = resolve(CWD, "umd");
@@ -63,10 +63,13 @@ export const STYLE_IMPORT_RE = /@import\s+['"](.+)['"]\s*;/g
 
 
 export const SITE = resolve(dirname, '../../../site')
+export const SITE_DIR = resolve(CWD, ".keylion/site")
 export const SITE_PUBLIC_PATH = resolve(CWD, "public")
 export const SITE_CONFIG = resolve(CWD, ".keylion/site.config.json")
-export const SITE_DIR = resolve(CWD, '.keylion/site')
+export const SITE_PC = resolve(CWD, '.keylion/pc.routes.ts')
+export const SITE_MOBILE = resolve(CWD, '.keylion/mobile.routes.ts')
 
+// export const SITE_LAYOUT = resolve(SITE_DIR,)
 
 
 

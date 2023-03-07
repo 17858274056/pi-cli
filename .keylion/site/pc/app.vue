@@ -1,18 +1,21 @@
 <script>
-import {useRoute} from "vue-router";
-import Demo from "./src/demo.md";
+import Layout from "./components/layout/index.vue";
 export default {
   name: "app",
   components: {
-    Demo,
+    Layout,
   },
 };
 </script>
 
 <template>
   <div>
-    1232
-    <Demo></Demo>
-    <router-view></router-view>
+    <Layout></Layout>
   </div>
 </template>
+
+<style>
+body {
+  min-width: 1100px;
+}
+</style>

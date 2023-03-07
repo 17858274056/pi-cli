@@ -1,0 +1,17 @@
+:root {
+  --keylion-doc-header-top-height: 60px;
+  --van-doc-simulator-width: 360px;
+  --keylion-doc-nav-top: 60px;
+  --keylion-doc-nav-width: 220px;
+}
+
+.keylion-doc-theme-dark {
+  --keylion-doc-header-bg: rgb(32, 39, 53);
+  --keylion-doc-nav-color: #707989;
+  --keylion-doc-nav-bg: rgb(16, 21, 30);
+  --keylion-doc-bg: #202124;
+}
+
+.keylion-doc-theme-light {
+  --keylion-doc-header-bg: rgb(255, 255, 255);
+}

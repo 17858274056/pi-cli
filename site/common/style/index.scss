@@ -1,0 +1,20 @@
+ul,
+li {
+  list-style: none;
+}
+
+body {
+  background-color: var(--keylion-doc-bg);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.keylion-nav-link {
+  width: 100%;
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}

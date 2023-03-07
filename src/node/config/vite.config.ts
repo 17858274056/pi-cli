@@ -6,8 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import jsx from '@vitejs/plugin-vue-jsx'
 import { html, inlineCss } from 'keylion-plugins'
 import uni from '@dcloudio/vite-plugin-uni'
-import { resolveDocument } from '../compiler/gen-site-desktop.js'
-import Markdown from 'vite-plugin-md'
+import { resolveH5Document, resolvePCDocument, resolveConfig } from '../compiler/gen-site-desktop.js'
 import markdownIt from 'markdown-it'
 
 import {
@@ -24,7 +23,26 @@ import {
 } from '../share/constant.js'
 
 
-function siteDocument() {
+function siteConfig() {
+    const virtualModule = 'keylion-site-config'
+    const virtualModuleId = `keylion-cli:${virtualModule}`
+    return {
+        name: "vite-plugins(keylion-cli)-site-config",
+        resolveId(id: string) {
+            if (id === virtualModule) {
+                return virtualModuleId
+            }
+
+        },
+        load(id: string) {
+            if (id === virtualModuleId) {
+                return resolveConfig()
+            }
+        }
+    }
+}
+
+function sitePcDocument() {
     const virtualModule = 'keylion-site-desktop'
     const virtualModuleId = `keylion-cli:${virtualModule}`
     return {
@@ -37,36 +55,52 @@ function siteDocument() {
         },
         load(id: string) {
             if (id === virtualModuleId) {
-                return resolveDocument()
+                return resolvePCDocument()
             }
         }
     }
 }
 
+function siteH5Document() {
+    const virtualModule = 'keylion-site-h5'
+    const virtualModuleId = `keylion-cli:${virtualModule}`
+    return {
+        name: "vite-plugins(keylion-cli)-site-h5",
+        resolveId(id: string) {
+            if (id === virtualModule) {
+                return virtualModuleId
+            }
+
+        },
+        load(id: string) {
+            if (id === virtualModuleId) {
+                return resolveH5Document()
+            }
+        }
+    }
+}
+
+
 function getPluginsTest() {
     return {
-        name: "vite-plugin-test",
+        name: "vite-plugin-md",
         enforce: "pre",
         transform(source: string, id: string) {
             if (!/\.md$/.test(id)) return
             let mdV = markdownIt({
-                html: true
+                // html: true
             }).render(source)
+
             return `
             <template><div class="varlet-site-doc">${mdV}</div></template>
             
             <script>
         
             export default {
-              components: {
-               
-              }
+          
             }
             </script>
               `
-        },
-        async handleHotUpdate(ctx: any) {
-            console.log(ctx)
         }
     }
 }
@@ -90,20 +124,19 @@ export function getDevConfig(config: Required<keylionConfig>): InlineConfig {
         server: {
             host: host === 'localhost' ? '0.0.0.0' : host,
             port: get(config, 'port'),
-            hmr: {
-                overlay: false
-            }
+            hmr: true
         },
         publicDir: SITE_PUBLIC_PATH,
         plugins: [
-            siteDocument(),
+            sitePcDocument(),
+            siteH5Document(),
+            siteConfig(),
             vue({
                 include: [/\.vue$/, /\.md$/]
             }),
             jsx(),
+            // @ts-ignore
             getPluginsTest(),
-            Markdown(),
-            uLen && uni(),
             html({
                 data: {
                     logo: get(config, "logo"),

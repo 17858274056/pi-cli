@@ -4,7 +4,9 @@
         "outDir": "./lib",
         "types": [
             "@dcloudio/types"
-        ]
+        ],
+        "jsxFactory": "h",
+        "jsxFragmentFactory": "Fragment",
     },
     "include": [
         "src/**/*"
