@@ -8,6 +8,7 @@ import { html, inlineCss } from 'keylion-plugins'
 import uni from '@dcloudio/vite-plugin-uni'
 import { resolveH5Document, resolvePCDocument, resolveConfig } from '../compiler/gen-site-desktop.js'
 import markdownIt from 'markdown-it'
+import hljs from 'highlight.js'
 
 import {
     ES_DIR,
@@ -79,7 +80,67 @@ function siteH5Document() {
         }
     }
 }
+function highlight(str: string, lang: string, style?: string) {
+    let link = ''
+    if (style) {
+        link = '<link class="hljs-style" rel="stylesheet" href="' + style + '"/>'
+    }
 
+    if (lang && hljs.getLanguage(lang)) {
+        return (
+            '<pre class="hljs"><code>' +
+            link +
+            hljs.highlight(str, { language: lang, ignoreIllegals: true }).value +
+            '</code></pre>'
+        )
+    }
+
+    return ''
+}
+
+function injectCodeExample(source: string) {
+    const codeRE = /(<pre class="hljs">(.|\r|\n)*?<\/pre>)/g;
+
+    return source.replace(codeRE, (str) => {
+        const flags = [
+            '// playground-ignore\n',
+            '<span class="hljs-meta prompt_"># </span><span class="language-bash">playground-ignore</span>\n',
+            '<span class="hljs-comment">// playground-ignore</span>\n',
+            '<span class="hljs-comment">/* playground-ignore */</span>\n',
+            '<span class="hljs-comment">&lt;!-- playground-ignore --&gt;</span>\n',
+        ]
+        const attr = flags.some((flag) => str.includes(flag)) ? "playground-ignore" : ""
+        str = flags.reduce((str, flag) => str.replace(flag, ''), str)
+        return `<code-example ${attr}>${str}</code-example>`
+    })
+}
+
+
+export interface MarkdownOptions {
+    style?: string
+}
+
+
+function markDownToParse(source: string, options?: MarkdownOptions) {
+    let mdV = markdownIt({
+        html: true,
+        highlight: (str, lang) => highlight(str, lang)
+    }).render(source)
+    const hGroup = mdV.replace(/<h3/g, ":::<h3").replace(/<h2/g, ":::<h2").split(":::")
+    let examCode = `
+    <template><div class="keylion-site-doc">${hGroup.map(fragment => (fragment.includes("<h3") ? `<div class='card'>${fragment}</div>` : fragment)).join("")
+        }</div></template>
+    
+    <script>
+
+    export default {
+  
+    }
+    </script>
+      `
+    examCode = injectCodeExample(examCode)
+    return examCode
+}
 
 function getPluginsTest() {
     return {
@@ -87,20 +148,19 @@ function getPluginsTest() {
         enforce: "pre",
         transform(source: string, id: string) {
             if (!/\.md$/.test(id)) return
-            let mdV = markdownIt({
-                // html: true
-            }).render(source)
-
-            return `
-            <template><div class="varlet-site-doc">${mdV}</div></template>
-            
-            <script>
-        
-            export default {
-          
+            try {
+                return markDownToParse(source)
+            } catch (e: any) {
+                console.error(e)
             }
-            </script>
-              `
+        },
+        async handleHotUpdate(ctx: any) {
+            if (!/\.md$/.test(ctx.file)) return
+
+            const readSource = ctx.read;
+            ctx.read = async function () {
+                return markDownToParse(await readSource())
+            }
         }
     }
 }

@@ -1,8 +1,9 @@
 :root {
   --keylion-doc-header-top-height: 60px;
   --van-doc-simulator-width: 360px;
-  --keylion-doc-nav-top: 60px;
+  --keylion-doc-nav-top: 100px;
   --keylion-doc-nav-width: 220px;
+  --keylion-site-color-link: #07c160;
 }
 
 .keylion-doc-theme-dark {
@@ -10,8 +11,36 @@
   --keylion-doc-nav-color: #707989;
   --keylion-doc-nav-bg: rgb(16, 21, 30);
   --keylion-doc-bg: #202124;
+  --keylion-doc-site: #1e1e1e;
+  --keylion-code-color: rgba(200, 200, 200, 0.85);
+  --keylion-site-txt: rgba(255, 255, 255, 0.75);
+  --keylion-site-color-2: rgba(255, 255, 255, 0.9);
+  --keylion-site-color-1: #fff;
+  --keylion-hljs-bg: #272727;
+  --keylion-hljs-tx-color: #fff;
+  --keylion-border-color: #333;
+  --keylion-table-tr-txt: #fff;
+  --keylion-config-color-sub-text: #aaa;
+  --keylion-site-h1-txt: #fff;
+  --site-config-color-border: #333;
+  --site-config-color-shadow: #121212;
 }
 
 .keylion-doc-theme-light {
+  --site-config-color-shadow: #eee;
+  --keylion-site-h1-txt: #000;
+  --keylion-table-tr-txt: #000;
+  --keylion-config-color-sub-text: #888;
   --keylion-doc-header-bg: rgb(255, 255, 255);
+  --keylion-code-color: #58727e;
+  --keylion-code-bg: #f7f8fa;
+  --keylion-border-color: #f2f3f5;
+  --keylion-doc-table-color: #34495e;
+  --keylion-hljs-bg: #fafafa;
+  --keylion-hljs-tx-color: #58727e;
+  --keylion-site-config-primary: #2196f3;
+  --keylion-site-txt: #555;
+  --keylion-site-color-2: rgba(0, 0, 0, 0.9);
+  --keylion-site-color-1: #000;
+  --site-config-color-border: rgba(0, 0, 0, 0.12);
 }

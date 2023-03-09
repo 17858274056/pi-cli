@@ -3,8 +3,9 @@ import { resolve } from 'path'
 export const dirname = getDirname(import.meta.url);
 export const CWD = process.cwd();
 export const KEYLION_CONFIG = resolve(CWD, "keylion.config.mjs");
-export const SRC_DIR = resolve(CWD, "src");
+export const SRC_DIR = resolve(CWD, "views");
 export const ES_DIR = resolve(CWD, "es");
+export const SITE_OUTPUT_PATH = resolve(CWD, "site")
 export const LIB_DIR = resolve(CWD, "lib");
 export const UMD_DIR = resolve(CWD, "umd");
 export const TYPES_DIR = resolve(CWD, "types");

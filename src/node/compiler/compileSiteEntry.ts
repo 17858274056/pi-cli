@@ -96,9 +96,7 @@ export async function buildPcSiteRoutes() { // 编译生成keylion.pc.routes.js 
            
     ]
  `;
-
     writeFileSync(resolve(SITE_DIR, "..", "pc.routes.ts"), routesImport)
-
 }
 
 
@@ -108,7 +106,6 @@ async function buildSiteSource() {
 
 export async function buildSiteEntry() {
     let config = await getKeyLionConfig(true)
-    // await Promise.all([buildSiteSource()])
     await Promise.all([buildMobileSiteRoutes(), buildPcSiteRoutes(), buildSiteSource()])
 
     return config

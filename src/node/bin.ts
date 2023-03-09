@@ -29,6 +29,13 @@ program.command("compile")
         const { compile } = await import("./commands/compile.js")
         compile()
     })
+
+program.command("build:vite")
+    .action(async () => {
+        const { build } = await import("./commands/build.js")
+        await build()
+    })
+
 program.help()
 program.version(getCliVersion())
 program.parse()

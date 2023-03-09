@@ -51,7 +51,7 @@ watch(
   height: var(--keylion-doc-header-top-height);
   background-color: var(--keylion-doc-header-bg);
   color: var(--keylion-doc-nav-color);
-
+  border-bottom: 1px solid var(--site-config-color-border);
   width: 100%;
   .header-icons {
     font-size: 26px;
@@ -60,6 +60,7 @@ watch(
   .theme-icon {
     width: 30px;
     height: 30px;
+    margin-right: 50px;
   }
 }
 </style>

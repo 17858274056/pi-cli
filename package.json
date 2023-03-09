@@ -1,6 +1,6 @@
 {
   "name": "keylion-cli",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "cli keylion dev components",
   "main": "./lib/node/index.js",
   "module": "./lib/node/index.js",
@@ -37,6 +37,7 @@
     "cac": "^6.7.14",
     "chalk": "^5.2.0",
     "chokidar": "^3.5.3",
+    "clipboard": "^2.0.11",
     "commander": "^10.0.0",
     "ejs": "^3.1.8",
     "esbuild": "^0.17.7",
@@ -44,6 +45,7 @@
     "fs-extra": "^11.1.0",
     "glob": "^8.1.0",
     "hash-sum": "^2.0.0",
+    "highlight.js": "^11.7.0",
     "inquirer": "^9.1.4",
     "keylion-plugins": "workspace:*",
     "keylion-share": "workspace:*",

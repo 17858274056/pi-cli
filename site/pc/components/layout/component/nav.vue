@@ -1,5 +1,5 @@
 <template>
-  <aside class="keylion-nav">
+  <aside class="keylion-nav" :style="style">
     <ul class="keylion-nav-list" v-for="docs in mockRoutes">
       <template v-if="docs.items.length > 0">
         <div class="keylion-nav-docs-h1">
@@ -21,22 +21,39 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import {useRouter} from "vue-router";
 import config from "keylion-site-config";
-console.log(config);
 let mockRoutes = config?.routes || [];
 let router = useRouter();
+
+let top = ref(0);
+
+let style = computed(() => {
+  return {
+    top: top.value,
+  };
+});
+
 function navClick(doc) {}
+
+function isScroll() {
+  let {pageYOffset: offset} = window;
+
+  top.value = Math.max(0, 60 - offset);
+}
+
+isScroll();
+window.addEventListener("scroll", isScroll);
 </script>
 
 <style scoped lang="scss">
 .keylion-nav {
   padding-left: 24px;
   background-color: var(--keylion-doc-nav-bg);
-  position: absolute;
+  position: fixed;
   left: 0;
-  top: var(--keylion-doc-nav-top);
+
   min-width: var(--keylion-doc-nav-width);
   max-width: var(--keylion-doc-nav-width);
   color: var(--keylion-doc-nav-color);
