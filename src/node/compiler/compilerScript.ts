@@ -34,7 +34,7 @@ export async function completeSuffixDep(file: string, code: string) { // 补全 
 
 
     const replacer = function (code: string, ext: string) {
-        let depFile = ext.slice(1, ext.length - 1)
+        let depFile = ext.replace(/'/g, "").replace(/"/g, "")
         let isNodeModule = !depFile.startsWith('.')
         let targetFile = dirname(file)
         let extn = extname(depFile)

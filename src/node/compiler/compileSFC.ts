@@ -35,6 +35,8 @@ function injectRender(code: string, sc: string) {
 }
 
 
+
+
 export async function compileSfc(filename: string, path: string) { // 编译 sfc 
     let source = await readFile(path, 'utf-8')
     let { descriptor } = parseSFC(source, { sourceMap: false, filename })

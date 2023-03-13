@@ -15,6 +15,12 @@ import { get } from 'lodash-es'
 import { ignoreFile } from '../share/constant.js'
 let { readdir, removeSync, ensureFileSync, ensureDir, copy } = fse
 
+
+
+async function ensureFile() {
+    await Promise.all([ensureDir(ES_DIR), ensureDir(LIB_DIR), ensureDir(UMD_DIR)])
+}
+
 export async function compileBundle() {
     const config = await getKeyLionConfig()
     const name = kebabCase(get(config, 'name'))
