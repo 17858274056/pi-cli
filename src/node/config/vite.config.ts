@@ -232,7 +232,7 @@ export function getBundleConfig(keylionConfig: Required<keylionConfig>, buildOpt
     }
     return {
         logLevel: 'silent',
-
+        plugins,
         build: {
             minify: format === 'cjs' ? false : 'esbuild',
             emptyOutDir,

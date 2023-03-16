@@ -1,33 +1,33 @@
-import { defineComponent as t, openBlock as s, createElementBlock as c } from "vue";
-const a = {}, m = { class: "demo-f" };
-function d(e, r) {
-  return s(), c("div", m);
+import { defineComponent as e, openBlock as o, createElementBlock as s } from "vue";
+const c = {}, i = { class: "aa-a" };
+function l(n, u) {
+  return o(), s("div", i, "aaa-aaa-aa-aa");
 }
-var n = t({
-  render: d,
-  name: "demo-f",
-  props: a,
+var a = e({
+  render: l,
+  name: "aa-a",
+  props: c,
   setup() {
   }
 });
-n.install = function(e) {
-  e.component(n.name, n);
+a.install = function(n) {
+  n.component(a.name, a);
 };
-const u = n;
-var o = n;
-const i = "0.1.1";
-function l(e) {
-  o.install && e.use(o);
+const p = a;
+var t = a;
+const r = "0.1.2";
+function d(n) {
+  t.install && n.use(t);
 }
-const p = {
-  version: i,
-  install: l,
-  DemoF: o
+const A = {
+  version: r,
+  install: d,
+  AaA: t
 };
 export {
-  o as DemoF,
-  u as _DemoFComponent,
-  p as default,
-  l as install,
-  i as version
+  t as AaA,
+  p as _AaAComponent,
+  A as default,
+  d as install,
+  r as version
 };

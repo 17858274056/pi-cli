@@ -1,22 +1,22 @@
-    import DemoF from  './demo-f/index.mjs'
+    import AaA from  './aa-a/index.mjs'
 
-    export * from './demo-f/index.mjs'
+    export * from './aa-a/index.mjs'
 
-    import './demo-f/style/index.mjs'
+    import './aa-a/style/index.mjs'
 
-    const version = '0.1.1'
+    const version = '0.1.2'
      function install(app){
-        DemoF.install && app.use(DemoF)
+        AaA.install && app.use(AaA)
       }
     export {
       version,
       install,
-      DemoF
+      AaA
     }
     
     export default {
       version,
       install,
-      DemoF
+      AaA
     }
     

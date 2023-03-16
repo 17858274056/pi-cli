@@ -41,7 +41,6 @@ export const replaceExt = (file: string, ext: string) => file.replace(extname(fi
 
 export const getPublicDirs = async (): Promise<string[]> => {
     const srcDir: string[] = await readdir(SRC_DIR)
-    console.log(srcDir)
     return srcDir.filter((filename) => isPublicDir(resolve(SRC_DIR, filename)))
 }
 
