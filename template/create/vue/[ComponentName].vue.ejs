@@ -2,14 +2,10 @@
   <div class="<%- kebabCaseName %>"></div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import {props} from "./props";
   import {defineComponent} from "vue";
-  export default defineComponent({
-    name: "<%- kebabCaseName %>",
-    props,
-    setup() {},
-  });
+  let prop = defineProps(props);
 </script>
 
 <style lang="scss">

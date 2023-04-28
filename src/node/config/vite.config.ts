@@ -5,11 +5,10 @@ import type { keylionConfig } from './keylion.config.js'
 import vue from '@vitejs/plugin-vue'
 import jsx from '@vitejs/plugin-vue-jsx'
 import { html, inlineCss } from 'keylion-plugins'
-import uni from '@dcloudio/vite-plugin-uni'
 import { resolveH5Document, resolvePCDocument, resolveConfig } from '../compiler/gen-site-desktop.js'
 import markdownIt from 'markdown-it'
 import hljs from 'highlight.js'
-
+// import { KEYLION_CONFIG, SITE } from '../share/constant.js'
 import {
     ES_DIR,
     SITE_CONFIG,
@@ -171,6 +170,7 @@ export function getDevConfig(config: Required<keylionConfig>): InlineConfig {
     const host = get(config, "host")
     let uniConfig = get(config, 'uniapp')
     let uLen = uniConfig.length
+    // process.env.UNI_INPUT_DIR = resolve(SITE, "./uniapp"); // 定义uniapp解析位置
     return {
         root: SITE_DIR, // 项目根目录
         resolve: {
@@ -191,10 +191,14 @@ export function getDevConfig(config: Required<keylionConfig>): InlineConfig {
             sitePcDocument(),
             siteH5Document(),
             siteConfig(),
+            // @ts-ignore
+
+            // uni.default(),
             vue({
                 include: [/\.vue$/, /\.md$/]
             }),
             jsx(),
+
             // @ts-ignore
             getPluginsTest(),
             html({
@@ -240,7 +244,7 @@ export function getBundleConfig(keylionConfig: Required<keylionConfig>, buildOpt
             lib: {
                 name,
                 formats: [format],
-                fileName: () => fileName,
+                fileName,
                 entry: resolve(ES_DIR, 'index.bundle.mjs'),
             },
             rollupOptions: {

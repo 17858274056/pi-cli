@@ -1,7 +1,8 @@
 import { createServer, ViteDevServer } from 'vite'
 import chokidar, { FSWatcher } from 'chokidar'
 import fse from 'fs-extra'
-import { KEYLION_CONFIG } from '../share/constant.js'
+import { resolve } from 'path'
+import { KEYLION_CONFIG, SITE } from '../share/constant.js'
 import logger from '../share/logger.js'
 import { getKeyLionConfig } from '../config/keylion.config.js'
 import { getDevConfig } from '../config/vite.config.js'
@@ -21,6 +22,8 @@ async function startServer(force: boolean | undefined) {
     let devConfig = await buildSiteEntry()
     let keylionConfig = getDevConfig(devConfig)
     let initConfig = merge(keylionConfig, force ? { optimizeDeps: { force: true } } : {})
+
+
     server = await createServer(initConfig)
 
     await server.listen()

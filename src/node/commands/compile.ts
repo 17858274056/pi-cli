@@ -1,18 +1,13 @@
-import { isDir } from './../share/fsUtils';
 import fse from "fs-extra"
-import path from 'path'
 import { SRC_DIR, ES_DIR, UMD_DIR, LIB_DIR } from '../share/constant.js'
-import { compilerDir } from '../compiler/compileModule.js'
 import ora from 'ora'
 import { compileBundle, compileMoudle } from '../compiler/compileModule.js'
 let { readdir, ensureDir, remove } = fse
 
-interface compilerOption {
 
-}
 
 function removeDir() {
-    return Promise.all([remove(ES_DIR), remove(UMD_DIR)])
+    return Promise.all([remove(ES_DIR), remove(UMD_DIR), remove(LIB_DIR)])
 }
 
 const dest = readdir(SRC_DIR)
@@ -37,7 +32,6 @@ export async function compile() {
 
     process.env.BABEL_MODULE = 'module';
     await runTask("moudle", compileMoudle)
-
     process.env.BABEL_MODULE = ''
     await runTask("bundle", compileBundle)
 }

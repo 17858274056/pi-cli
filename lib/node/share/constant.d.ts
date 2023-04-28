@@ -38,3 +38,4 @@ export declare const SITE_PUBLIC_PATH: string;
 export declare const SITE_CONFIG: string;
 export declare const SITE_PC: string;
 export declare const SITE_MOBILE: string;
+export declare const TEMPLATE: string;

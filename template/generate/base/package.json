@@ -1,0 +1,40 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "es/index.mjs",
+  "type": "module",
+  "scripts": {
+    "create": "keylion-cli create",
+    "compile": "keylion-cli compile",
+    "gen": "keylion-cli gen",
+    "dev": "keylion-cli dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^4.0.4",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "keylion-cli": "^0.1.5",
+    "clipboard": "^2.0.6",
+    "lodash-es": "^4.17.21",
+    "typescript": "^4.4.4",
+    "vue": "3.2.25",
+    "vue-router": "4.0.12"
+  },
+  "ignoreFiles": [
+    "lib/**",
+    "es/**",
+    "umd/**",
+    "site/**",
+    "public/**",
+    ".keylion/**"
+  ],
+  "browserslist": [
+    "Chrome >= 54",
+    "iOS >= 10"
+  ],
+  "packageManager": "pnpm@7.9.0"
+}

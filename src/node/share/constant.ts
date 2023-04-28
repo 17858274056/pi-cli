@@ -26,13 +26,13 @@ export const VITE_RESOLVE_EXTENSIONS = [
     ".scss",
     ".css",
 ];
-export const SCRIPTS_EXTENSIONS = [".tsx", ".ts", ".jsx", ".js"];
+export const SCRIPTS_EXTENSIONS = [".tsx", ".ts", ".jsx", ".js", '.mjs'];
 export const PUBLIC_DIR_INDEXES = [
     "index.vue",
     "index.tsx",
     "index.ts",
     "index.jsx",
-    "index.js",
+    "index.js"
 ];
 export const STYLE_DIR_NAME = "style"
 export const EXAMPLE_DIR_NAME = 'example'
@@ -48,15 +48,12 @@ export const IMPORT_DEPEDENCE_RE = /import\s+(".*?"|'.*?')/g
 // css
 export const STYLE_EXTENSIONS = ['scss', 'less', '.css']
 export const STYLE_EXTENSION = ['index.css', 'index.less', '.index.scss']
-
 export const SCSS_RE = /(?<!['"])import\s+["'](\.{1,2}\/.+\.scss)["']\s*;/g
 export const CSS_RE = /(?<!['"])import\s+["'](\.{1,2}\/.+\.css)["']\s*;?/g
 export const LESS_RE = /(?<!['"])import\s+["'](\.{1,2}\/.+\.less)["']\s*;/g
 export const STYLE_IMPORT_RE = /@import\s+['"](.+)['"]\s*;/g
 
 // js
-
-
 
 
 
@@ -73,7 +70,9 @@ export const SITE_MOBILE = resolve(CWD, '.keylion/mobile.routes.ts')
 // export const SITE_LAYOUT = resolve(SITE_DIR,)
 
 
+// template
 
+export const TEMPLATE = resolve(dirname, "../../../template")
 
 
 

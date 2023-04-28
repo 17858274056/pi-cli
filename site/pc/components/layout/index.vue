@@ -7,7 +7,7 @@
   <div class="keylion-h5-wrap">
     <div class="keylion-h5-right">
       <iframe
-        src="../../../mobile.html"
+        src="../../../uniapp.html"
         frameborder="0"
         class="keylion-h5-iframe"
       ></iframe>
@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import Header from "./component/header.vue";
 import Nav from "./component/nav.vue";
+console.log("--123123");
 </script>
 
 <style lang="scss" scoped>

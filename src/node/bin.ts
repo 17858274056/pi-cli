@@ -36,6 +36,13 @@ program.command("build:vite")
         await build()
     })
 
+
+program.command("gen")
+    .action(async () => {
+        const { gen } = await import("./commands/gen.js")
+        await gen()
+    })
+
 program.help()
 program.version(getCliVersion())
 program.parse()
