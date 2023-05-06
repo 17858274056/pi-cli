@@ -1,6 +1,6 @@
 {
   "name": "keylion-cli",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "cli keylion dev components",
   "main": "./lib/node/index.js",
   "module": "./lib/node/index.js",
@@ -9,11 +9,6 @@
   "bin": {
     "keylion-cli": "./lib/node/bin.js"
   },
-  "files": [
-    "lib",
-    "site",
-    "template"
-  ],
   "private": false,
   "scripts": {
     "build": "tsc",
