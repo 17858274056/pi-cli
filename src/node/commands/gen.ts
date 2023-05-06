@@ -1,7 +1,9 @@
 import fse from 'fs-extra'
 import inquirer from 'inquirer'
 import { resolve } from 'path'
+import { execSync as exec } from 'node:child_process'
 import { CWD, TEMPLATE, KEYLION_CONFIG } from "../share/constant.js"
+import { nextTick } from 'process'
 let {
     readFileSync,
     copy,
@@ -31,5 +33,8 @@ export function initGen(name: string) {
     packages.name = name;
     writeFileSync(resolve(CWD, "package.json"), JSON.stringify(packages, null, 4))
     copy(config, KEYLION_CONFIG)
+    nextTick(() => {
+        exec("pnpm i", { stdio: "inherit" })
+    })
 }
 
