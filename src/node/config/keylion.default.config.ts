@@ -13,13 +13,18 @@ export default defineConfig({
         baidu: ''
     },
     uniapp: {
-        pages: [],
-        "globalStyle": {
-            "navigationBarTextStyle": "black",
-            "navigationBarTitleText": "uni-app",
-            "navigationBarBackgroundColor": "#F8F8F8",
-            "backgroundColor": "#F8F8F8"
+        uniappConfig: {
+            "globalStyle": {
+                "navigationBarTextStyle": "black",
+                "navigationBarTitleText": "uni-app",
+                "navigationBarBackgroundColor": "#F8F8F8",
+                "backgroundColor": "#F8F8F8"
+            }
+        },
+        server: {
+            port: 3000
         }
+
     },
     themeKey: "KEYLION_THEME",
     lightTheme: {

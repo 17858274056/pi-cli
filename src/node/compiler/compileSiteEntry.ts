@@ -61,6 +61,11 @@ export async function buildMobileSiteRoutes() { // 编译生成 keylion.mobile.r
 }
 
 
+export async function buildUniappRoutes() { // 编译生成keylion.uniapp.routes.js
+
+}
+
+
 export async function buildPcSiteRoutes() { // 编译生成keylion.pc.routes.js  文件取于 docs
     let routes: routes[] = []
 
