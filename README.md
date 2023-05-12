@@ -1,4 +1,4 @@
-## 仿@varlet/cli 和 vant-cli 的组件打包工具
+## 组件打包工具 支持 uniapp
 
 ### 下载
 
@@ -29,6 +29,8 @@ keylion-cli build
 keylion-cli dev
 # force mode
 keylion-cli dev -f
+
+###
 
 ```
 
