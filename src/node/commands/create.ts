@@ -10,7 +10,7 @@ import { get } from 'lodash-es'
 import { camelize, kebabCase, bigCamelize } from 'keylion-share'
 let uniRoutesMapFile = resolve(SITE_DIR, "..", "uniapp.routes.ts")
 
-let { copySync, readFileSync, writeFileSync, removeSync, pathExistsSync, remove } = fse
+let { copySync, readFileSync, writeFileSync, removeSync, pathExistsSync, remove, existsSync } = fse
 
 interface createOption {
     keylionCaseName: string
@@ -56,7 +56,6 @@ async function templateRender(path: string, componentName: string, renderData: r
             .replace("[ComponentName]", bigCamelize(componentName))
             .replace(".ejs", "")
         writeFileSync(file, code)
-        console.log(file)
 
         removeSync(item)
     })
@@ -151,7 +150,8 @@ export async function create(options: createOption) {
         if (!locale) removeSync(resolve(fileComponentName, DOCS_DIR_NAME))
     }
     copySync(resolve(dirname, `../../../template/create/${getCliMode()}`), fileComponentName)
-    remove(uniRoutesMapFile)
+
+    if (existsSync(SITE_DIR)) remove(uniRoutesMapFile)
     await templateRender(fileComponentName, componentName, renderData)
     if (renderData.style !== 'vue') {
         removeSync(resolve(fileComponentName, `${renderData.bigCamelizeName}.vue`))

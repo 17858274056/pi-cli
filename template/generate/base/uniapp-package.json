@@ -19,10 +19,9 @@
         "@dcloudio/uni-h5": "3.0.0-alpha-3080220230428002",
         "vite": "^4.3.0",
         "vue": "^3.2.47",
-        "keylion-cli": "^0.1.5",
-        "clipboard": "^2.0.6",
+        "clipboard": "^2.0.11",
         "lodash-es": "^4.17.21",
-        "vue-router": "^4.2.0"
+        "vue-router": "^4.1.6"
     },
     "peerDependencies": {
         "@dcloudio/uni-app": "3.0.0-alpha-3080220230428002",
@@ -32,13 +31,12 @@
         "@dcloudio/vite-plugin-uni": "3.0.0-alpha-3080220230428002",
         "vite": "^4.3.0",
         "vue": "^3.2.47",
-        "clipboard": "^2.0.6",
-        "keylion-cli": "^0.1.7"
+        "clipboard": "^2.0.6"
     },
     "devDependencies": {
-        "typescript": "^4.4.4",
-        "@vitejs/plugin-vue": "^4.1.0",
-        "@vitejs/plugin-vue-jsx": "^3.0.1",
+        "typescript": "^4.9.5",
+        "@vitejs/plugin-vue": "^4.0.0",
+        "@vitejs/plugin-vue-jsx": "^3.0.0",
         "@dcloudio/vite-plugin-uni": "3.0.0-alpha-3080220230428002",
         "@dcloudio/uni-cli-shared": "3.0.0-alpha-3070720230316001"
     },

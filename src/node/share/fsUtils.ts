@@ -2,6 +2,8 @@ import globSync from 'glob'
 import fse from 'fs-extra'
 import { extname, resolve } from 'path'
 import { fileURLToPath } from 'url'
+import slash from 'slash'
+
 import { CLI_PACKAGE_JSON, PUBLIC_DIR_INDEXES, SCRIPTS_EXTENSIONS, SRC_DIR, UI_PACKAGE_JSON } from './constant.js'
 
 const {
@@ -54,7 +56,7 @@ export const isPublicDir = (dir: string): boolean =>
 
 export function glob(pattern: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
-        globSync(pattern, (err, files) => {
+        globSync(slash(pattern), (err, files) => {
             if (err) {
                 reject(err)
             } else {
