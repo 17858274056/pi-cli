@@ -1,3 +1,6 @@
 node_modules/
 .keylion
 lib
+.DS_Store
+.gitigonre
+.npmrc

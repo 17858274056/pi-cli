@@ -6,14 +6,8 @@
   </div>
   <div class="keylion-h5-wrap">
     <div class="keylion-h5-right">
-      <!-- <iframe
-        src="http://localhost:5000"
-        frameborder="0"
-        class="keylion-h5-iframe"
-      ></iframe> -->
-
       <iframe
-        src="../../../mobile.html"
+        :src="iframeHref"
         frameborder="0"
         class="keylion-h5-iframe"
       ></iframe>
@@ -22,9 +16,15 @@
 </template>
 
 <script setup lang="ts">
+import {ref} from "vue";
 import Header from "./component/header.vue";
 import Nav from "./component/nav.vue";
-console.log("--123123");
+import keylionConfig from "keylion-site-config";
+let iframeHref = ref(
+  keylionConfig.uniapp
+    ? `http://localhost:${keylionConfig.uniapp.port}`
+    : "../../../mobile.html"
+);
 </script>
 
 <style lang="scss" scoped>

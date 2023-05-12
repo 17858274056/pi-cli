@@ -12,20 +12,6 @@ export default defineConfig({
     analysis: {
         baidu: ''
     },
-    uniapp: {
-        uniappConfig: {
-            "globalStyle": {
-                "navigationBarTextStyle": "black",
-                "navigationBarTitleText": "uni-app",
-                "navigationBarBackgroundColor": "#F8F8F8",
-                "backgroundColor": "#F8F8F8"
-            }
-        },
-        server: {
-            port: 3000
-        }
-
-    },
     themeKey: "KEYLION_THEME",
     lightTheme: {
         'color-body': '#fff',

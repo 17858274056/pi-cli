@@ -1,0 +1,58 @@
+{
+    "name": "",
+    "version": "1.0.0",
+    "description": "",
+    "main": "es/index.mjs",
+    "type": "module",
+    "scripts": {
+        "create": "keylion-cli create",
+        "compile": "keylion-cli compile",
+        "gen": "keylion-cli gen",
+        "dev": "keylion-cli dev"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@dcloudio/uni-app": "3.0.0-alpha-3080220230428002",
+        "@dcloudio/uni-components": "3.0.0-alpha-3080220230428002",
+        "@dcloudio/uni-h5": "3.0.0-alpha-3080220230428002",
+        "vite": "^4.3.0",
+        "vue": "^3.2.47",
+        "keylion-cli": "^0.1.5",
+        "clipboard": "^2.0.6",
+        "lodash-es": "^4.17.21",
+        "vue-router": "^4.2.0"
+    },
+    "peerDependencies": {
+        "@dcloudio/uni-app": "3.0.0-alpha-3080220230428002",
+        "@dcloudio/uni-cli-shared": "3.0.0-alpha-3070720230316001",
+        "@dcloudio/uni-components": "3.0.0-alpha-3080220230428002",
+        "@dcloudio/uni-h5": "3.0.0-alpha-3080220230428002",
+        "@dcloudio/vite-plugin-uni": "3.0.0-alpha-3080220230428002",
+        "vite": "^4.3.0",
+        "vue": "^3.2.47",
+        "clipboard": "^2.0.6",
+        "keylion-cli": "^0.1.7"
+    },
+    "devDependencies": {
+        "typescript": "^4.4.4",
+        "@vitejs/plugin-vue": "^4.1.0",
+        "@vitejs/plugin-vue-jsx": "^3.0.1",
+        "@dcloudio/vite-plugin-uni": "3.0.0-alpha-3080220230428002",
+        "@dcloudio/uni-cli-shared": "3.0.0-alpha-3070720230316001"
+    },
+    "ignoreFiles": [
+        "lib/**",
+        "es/**",
+        "umd/**",
+        "site/**",
+        "public/**",
+        ".keylion/**"
+    ],
+    "browserslist": [
+        "Chrome >= 54",
+        "iOS >= 10"
+    ],
+    "packageManager": "pnpm@7.9.0"
+}

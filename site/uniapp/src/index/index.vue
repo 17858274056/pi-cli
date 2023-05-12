@@ -7,9 +7,9 @@
   </view>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import {ref} from "vue";
-const title = ref("Hello12312312312");
+const title = ref("Hello12312132112122312312");
 </script>
 
 <style>
