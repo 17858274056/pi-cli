@@ -1,13 +1,15 @@
 import { get } from 'lodash-es'
 import { resolve } from 'path'
+import { fileURLToPath } from 'url'
 import { InlineConfig } from 'vite'
 import type { keylionConfig } from './keylion.config.js'
 import vue from '@vitejs/plugin-vue'
 import jsx from '@vitejs/plugin-vue-jsx'
-import { html, inlineCss } from 'keylion-plugins'
+import { html, inlineCss, uniPagesRoutes } from 'keylion-plugins'
 import { resolveH5Document, resolvePCDocument, resolveConfig } from '../compiler/gen-site-desktop.js'
 import markdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+
 // import { KEYLION_CONFIG, SITE } from '../share/constant.js'
 import {
     ES_DIR,
@@ -161,6 +163,28 @@ function getPluginsTest() {
                 return markDownToParse(await readSource())
             }
         }
+    }
+}
+
+
+export function getUniappDevConfig(config: Required<keylionConfig>): InlineConfig {
+    const defualtLanguage = get(config, "defaultLanguage")
+    let uniConfig = get(config, 'uniapp')
+    const host = get(config, "host")
+    //设置uni process.env变量改变文件获取路径
+    let uniappDir = resolve(SITE_DIR, "uniapp")
+    process.env.VITE_ROOT_DIR = uniappDir
+    process.env.UNI_INPUT_DIR = uniappDir
+    return {
+        root: uniappDir,
+        // root: SITE_DIR,
+        server: {
+            port: get(uniConfig, 'port') || 8000,
+            host: host === 'localhost' ? '0.0.0.0' : host,
+        },
+        plugins: [
+            uniPagesRoutes()
+        ]
     }
 }
 
