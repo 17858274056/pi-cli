@@ -56,7 +56,6 @@ async function templateRender(path: string, componentName: string, renderData: r
             .replace("[ComponentName]", bigCamelize(componentName))
             .replace(".ejs", "")
         writeFileSync(file, code)
-        console.log(file)
 
         removeSync(item)
     })
