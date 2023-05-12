@@ -1,11 +1,9 @@
-import { createServer, ViteDevServer } from 'vite'
+import { createServer, ViteDevServer, type InlineConfig } from 'vite'
 import chokidar, { FSWatcher } from 'chokidar'
-import fse from 'fs-extra'
-import { fork } from 'child_process'
-import { KEYLION_CONFIG, SITE } from '../share/constant.js'
+import fse, { remove } from 'fs-extra'
+import { KEYLION_CONFIG, SITE, SITE_DIR } from '../share/constant.js'
 import logger from '../share/logger.js'
-import { getKeyLionConfig } from '../config/keylion.config.js'
-import { getDevConfig, getUniappDevConfig } from '../config/vite.config.js'
+import { getDevConfig } from '../config/vite.config.js'
 import { execa } from 'execa'
 import { buildSiteEntry } from '../compiler/compileSiteEntry.js'
 import { SRC_DIR } from '../share/constant.js'
@@ -19,38 +17,37 @@ let server: ViteDevServer
 let watcher: FSWatcher
 let uniappServer: ViteDevServer
 let killEvnet: () => void
-async function startUniappServer(force: boolean | undefined) {
-    const isRestart = Boolean(server)
-    logger.info(`${isRestart ? 'Res' : 'S'}tarting server...`)
-    server && (server.close())
-    uniappServer && (uniappServer.close())
-    watcher && (watcher.close())
-    let devConfig = await buildSiteEntry()
-    let keylionConfig = getDevConfig(devConfig)
-    let uniConfig = getUniappDevConfig(devConfig)
-    let initConfig = merge(keylionConfig, force ? { optimizeDeps: { force: true } } : {})
-    // 先运行完上面的vite server 不能交叉 ,换思路，先让进程的先跑，然后liste完之后丢出信息主进程再跑8080的
+// async function startUniappServer(force: boolean | undefined) {
+//     const isRestart = Boolean(server)
+//     logger.info(`${isRestart ? 'Res' : 'S'}tarting server...`)
+//     server && (server.close())
+//     uniappServer && (uniappServer.close())
+//     watcher && (watcher.close())
+//     let devConfig = await buildSiteEntry()
+//     let keylionConfig = getDevConfig(devConfig)
+//     let initConfig = merge(keylionConfig, force ? { optimizeDeps: { force: true } } : {})
+//     // 先运行完上面的vite server 不能交叉 ,换思路，先让进程的先跑，然后liste完之后丢出信息主进程再跑8080的
 
+// }
+
+function uniServer(initConfig: InlineConfig, force: boolean | undefined, isRestart: boolean) {
 
     // process.nextTick(() => {
     let { kill, stdout, stderr } = execa("node", [resolve(__dirname, "../uniapp-dev.js")], {
-        // input: JSON.stringify(uniConfig)
     })
-
-    // let { kill, stdout, stderr } = fork(resolve(__dirname, "../uniapp-dev.js"), {
-    //     execArgv: [JSON.stringify(uniConfig)],
-    //     silent: true
-    // })
-    // stderr?.pipe(process.stderr)
 
     stdout?.on("data", async (msg) => {
         let message = msg.toString() as string
+        // console.log(message)
         if (message.includes("success")) {
             server = await createServer(initConfig)
             await server.listen()
             server.printUrls()
+            logger.success(`\n${isRestart ? 'Res' : 'S'}tart successfully!!!`)
         }
-        // console.log("---msg", msg.toString())
+        if (message.includes("error")) {
+            logger.error(message)
+        }
     })
     killEvnet = kill
     // stdout?.pipe(process.stdout)
@@ -58,24 +55,17 @@ async function startUniappServer(force: boolean | undefined) {
     if (pathExistsSync(KEYLION_CONFIG)) {
         watcher = chokidar.watch(KEYLION_CONFIG)
         watcher.on("change", () => {
-            // killEvnet && killEvnet()
-            startUniappServer(force)
+            killEvnet && killEvnet()
+            startServer(force)
         })
     }
-    logger.success(`\n${isRestart ? 'Res' : 'S'}tart successfully!!!`)
-
 }
 
-async function startServer(force: boolean | undefined) {
+async function h5Serve(initConfig: InlineConfig, force: boolean | undefined) {
     const isRestart = Boolean(server)
     logger.info(`${isRestart ? 'Res' : 'S'}tarting server...`)
     server && (server.close())
     watcher && (watcher.close())
-
-    let devConfig = await buildSiteEntry()
-    let keylionConfig = getDevConfig(devConfig)
-    let initConfig = merge(keylionConfig, force ? { optimizeDeps: { force: true } } : {})
-
 
     server = await createServer(initConfig)
 
@@ -88,6 +78,24 @@ async function startServer(force: boolean | undefined) {
     logger.success(`\n${isRestart ? 'Res' : 'S'}tart successfully!!!`)
 }
 
+async function startServer(force: boolean | undefined) {
+    const isRestart = Boolean(server)
+    logger.info(`${isRestart ? 'Res' : 'S'}tarting server...`)
+    server && (server.close())
+    uniappServer && (uniappServer.close())
+    watcher && (watcher.close())
+    let devConfig = await buildSiteEntry()
+    let keylionConfig = getDevConfig(devConfig)
+    let initConfig = merge(keylionConfig, force ? { optimizeDeps: { force: true } } : {})
+    if (devConfig.uniapp.open) {
+        uniServer(initConfig, force, isRestart)
+        remove(resolve(SITE_DIR, "./h5"))
+    } else {
+        h5Serve(initConfig, force)
+        remove(resolve(SITE_DIR, "uniapp"))
+    }
+}
+
 interface devOption {
     force: boolean | undefined
 }
@@ -95,9 +103,13 @@ interface devOption {
 export async function dev(option: devOption) {
     process.env.NODE_ENV = 'development'
     ensureDirSync(SRC_DIR)
-    // startServer(option.force)
-    startUniappServer(option.force)
+    startServer(option.force)
+    // startUniappServer(option.force)
 }
 
-
-// startUniappServer(false)
+// export async function uniappDev(option: devOption) {
+//     process.env.NODE_ENV = 'development'
+//     ensureDirSync(SRC_DIR)
+//     // startServer(option.force)
+//     startUniappServer(option.force)
+// }

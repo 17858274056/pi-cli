@@ -41,7 +41,7 @@
     "hash-sum": "^2.0.0",
     "highlight.js": "^11.7.0",
     "inquirer": "^9.1.4",
-    "keylion-cli": "^0.0.3",
+    "keylion-cli": "^0.1.7",
     "keylion-plugins": "workspace:*",
     "keylion-share": "workspace:*",
     "less": "^4.1.3",

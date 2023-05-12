@@ -8,7 +8,7 @@ import { createServer } from "vite";
 // import { uniPagesRoutes } from 'keylion-plugins'
 // let uniappDir = resolve(SITE_DIR, "uniapp");
 import { getUniappDevConfig } from '../config/vite.config.js'
-import { buildSiteEntry } from '../compiler/compileSiteEntry.js'
+import { getKeyLionConfig } from '../config/keylion.config.js'
 
 // 不能使用stdin去接 vite config 因为会爆参数长
 // (function () {
@@ -34,12 +34,14 @@ import { buildSiteEntry } from '../compiler/compileSiteEntry.js'
 // process.env.UNI_INPUT_DIR = uniappDir;
 
 (async () => {
-  let devConfig = await buildSiteEntry()
+  let devConfig = await getKeyLionConfig()
   let uniconfig = getUniappDevConfig(devConfig);
   uniconfig.plugins?.push((uni as any).default())
   createServer(uniconfig).then((server) => {
     server.listen().then(() => {
       console.log("success")
     })
+  }).catch((err) => {
+    console.log("error", err)
   })
 })()

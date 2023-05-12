@@ -177,9 +177,8 @@ export function getUniappDevConfig(config: Required<keylionConfig>): InlineConfi
     process.env.UNI_INPUT_DIR = uniappDir
     return {
         root: uniappDir,
-        // root: SITE_DIR,
         server: {
-            port: get(uniConfig, 'port') || 8000,
+            port: get(uniConfig, 'port') || 6000,
             host: host === 'localhost' ? '0.0.0.0' : host,
         },
         plugins: [

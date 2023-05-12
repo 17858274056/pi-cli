@@ -1,5 +1,5 @@
 import fse from 'fs-extra'
-import { SRC_DIR, dirname, STYLE_EXTENSIONS, DOCS_DIR_NAME } from '../share/constant.js'
+import { SRC_DIR, dirname, STYLE_EXTENSIONS, DOCS_DIR_NAME, SITE_DIR } from '../share/constant.js'
 import ejs from 'ejs'
 import { resolve } from 'path'
 import { getCliMode, glob, isDir } from '../share/fsUtils.js'
@@ -8,8 +8,9 @@ import inquirer from 'inquirer'
 import { getKeyLionConfig } from '../config/keylion.config.js'
 import { get } from 'lodash-es'
 import { camelize, kebabCase, bigCamelize } from 'keylion-share'
+let uniRoutesMapFile = resolve(SITE_DIR, "..", "uniapp.routes.ts")
 
-let { copySync, readFileSync, writeFileSync, removeSync, pathExistsSync } = fse
+let { copySync, readFileSync, writeFileSync, removeSync, pathExistsSync, remove } = fse
 
 interface createOption {
     keylionCaseName: string
@@ -150,6 +151,7 @@ export async function create(options: createOption) {
         if (!locale) removeSync(resolve(fileComponentName, DOCS_DIR_NAME))
     }
     copySync(resolve(dirname, `../../../template/create/${getCliMode()}`), fileComponentName)
+    remove(uniRoutesMapFile)
     await templateRender(fileComponentName, componentName, renderData)
     if (renderData.style !== 'vue') {
         removeSync(resolve(fileComponentName, `${renderData.bigCamelizeName}.vue`))

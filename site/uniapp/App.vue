@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import {watch} from "vue";
 import {getCurrentTheme} from "../common/iframe-sync";
 
