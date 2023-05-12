@@ -46,6 +46,7 @@ function removeExtraStyle(templates: string[], cssStyle: string) { // 删除不�
 }
 
 async function templateRender(path: string, componentName: string, renderData: renderData) {
+
     let templates = await glob(`${path}/**/*.ejs`)
 
     removeExtraStyle(templates, renderData.styleCss)

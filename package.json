@@ -1,6 +1,6 @@
 {
   "name": "keylion-cli",
-  "version": "0.1.9",
+  "version": "0.1.9-alpha.1683876825076",
   "description": "cli keylion dev components",
   "main": "./lib/node/index.js",
   "module": "./lib/node/index.js",
